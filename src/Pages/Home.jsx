@@ -21,9 +21,11 @@ import combo from '../images/combo.png'
 import chasma from '../images/chasma.png'
 import watch from '../images/watch.png'
 import Mens from '../catagories/Mens'
+import Chatbot from '../ChatBot/Chatbot'
+import { FcAssistant } from "react-icons/fc";
 
 const Home = () => {
-    const { isLoggedIn, token, catagories, setAllProducts } = useContext(AuthContext)
+    const { isLoggedIn, token, catagories, setAllProducts, chatShow,setChatShow } = useContext(AuthContext)
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -98,6 +100,11 @@ const Home = () => {
                 ) : (
                     <>
                         <div className="min-w-screen flex flex-col  lg:gap-10 gap-3 p-2 bg-slate-100">
+                            {/* ---- ChatBot ---- */}
+                            <FcAssistant 
+                            onClick={()=>setChatShow(true)}
+                            className={chatShow?' fixed hidden z-10 right-5 bottom-0':'text-5xl fixed z-10 right-5 bottom-5 cursor-pointer'} />
+                            <Chatbot/>
 
                             {/* HERO */}
                             <section className=" w-full  lg:h-[75vh] h-screen bg-linear-to-br from-[#000000] relative to-[#010447]  text-white lg:rounded-3xl rounded-br-4xl shadow-xl lg:flex-row flex flex-col lg:justify-center justify-between items-center text-center p-2">
