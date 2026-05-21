@@ -8,6 +8,7 @@ import Sidebar from '../catagories/Sidebar';
 import logo from '../images/logo.png'
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiFillCloseSquare } from 'react-icons/ai';
+import PurchasePopUp from '../ChatBot/PurchasePopUp';
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -34,6 +35,7 @@ const Navbar = () => {
         <div className="w-full h-[10vh] sticky top-0 z-50 backdrop-blur-lg bg-white/80 shadow-lg flex justify-between items-center lg:px-6 px-2 ">
             {/* ===== Sidebar Catagories ======= */}
             <Sidebar />
+            <PurchasePopUp/>
             {/* LOGO */}
             <div className="flex items-center lg:w-[10%] w-[25%] ">
                 <img src={logo} alt={logo}

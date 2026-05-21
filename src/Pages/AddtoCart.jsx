@@ -146,53 +146,62 @@ const AddtoCart = () => {
   }
 
   return (
-    <>
-      <div className="w-full min-h-screen bg-[#f6f9ff] flex flex-col items-center ">
+    <div className="w-full min-h-screen bg-[#f6f9ff] flex flex-col items-center p-4 sm:p-6">
 
-        {/* Title */}
-        <h1 className="text-4xl font-bold text-[#1e3a8a] mb-8">🛒 My Cart</h1>
+      {/* Title */}
+      <h1 className="text-3xl sm:text-4xl font-bold text-[#1e3a8a] mb-6 sm:mb-8">🛒 My Cart</h1>
 
-        <div className="w-[95%] max-w-7xl flex flex-wrap justify-between gap-8">
+      {/* MAIN WRAPPER */}
+      <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-6">
 
-          {/* ================= LEFT : CART ITEMS ================= */}
-          <div className="w-full lg:w-[68%] h-[75vh] bg-white rounded-3xl shadow-xl p-6 overflow-y-auto scrollbar-hide">
+        {/* ================= LEFT : CART ITEMS ================= */}
+        <div className="w-full lg:w-[68%] bg-white rounded-3xl shadow-xl p-4 sm:p-6 max-h-[70vh] overflow-y-auto">
 
-            {allCarts.length === 0 ? (
-              <div className="w-full h-full flex flex-col justify-center items-center text-center gap-4">
-                <h1 className="text-2xl font-semibold text-gray-600">Your cart feels lonely 🥺</h1>
-                <button
-                  onClick={() => navigate("/")}
-                  className="bg-blue-600 cursor-pointer hover:bg-[#011c55] text-white px-6 py-3 rounded-xl font-semibold transition">
-                  Continue Shopping
-                </button>
-              </div>
-            ) : (
-              allCarts.map((item) => (
-                <div
-                  key={item.id}
-                  className="w-full flex items-center gap-6 mb-5 p-4 rounded-2xl border hover:shadow-lg transition bg-[#fbfdff]">
+          {allCarts.length === 0 ? (
+            <div className="w-full h-full flex flex-col justify-center items-center text-center gap-4 py-20">
+              <h1 className="text-xl sm:text-2xl font-semibold text-gray-600">Your cart feels lonely 🥺</h1>
+              <button
+                onClick={() => navigate("/")}
+                className="bg-blue-600 hover:bg-[#011c55] text-white px-6 py-3 rounded-xl font-semibold transition">
+                Continue Shopping
+              </button>
+            </div>
+          ) : (
+            allCarts.map((item) => (
+              <div
+                key={item.id}
+                className="w-full flex flex-col sm:flex-row gap-4 sm:gap-6 mb-5 p-4 rounded-2xl border hover:shadow-lg transition bg-[#fbfdff]"
+              >
 
-                  {/* Image */}
-                  <img
-                    src={`${item.product.image}`}
-                    alt=""
-                    className="w-28 h-28 object-cover rounded-xl"
-                  />
+                {/* Image */}
+                <img
+                  src={`${item.product.image}`}
+                  alt=""
+                  className="w-full sm:w-28 h-44 sm:h-28 object-cover rounded-xl"
+                />
 
-                  {/* Info */}
-                  <div className="flex flex-col flex-1">
-                    <h2 className="text-lg font-semibold text-gray-800 line-clamp-1 ">{item.product.name}</h2>
-                    <h2 className="text-[0.8rem] font-semibold text-[#837d7d] line-clamp-1 ">{item.product.description}</h2>
+                {/* Info */}
+                <div className="flex flex-col flex-1 text-center sm:text-left">
+                  <h2 className="text-lg font-semibold text-gray-800 line-clamp-1">
+                    {item.product.name}
+                  </h2>
 
-                    <div className="flex gap-3 mt-2 items-center">
-                      <span className="text-xl font-bold text-blue-600">
-                        ₹{item.product.disc_price}
-                      </span>
-                      <span className="text-gray-400 line-through">
-                        ₹{item.product.price}
-                      </span>
-                    </div>
+                  <p className="text-xs text-gray-500 line-clamp-2">
+                    {item.product.description}
+                  </p>
+
+                  <div className="flex justify-center sm:justify-start gap-3 mt-2 items-center">
+                    <span className="text-xl font-bold text-blue-600">
+                      ₹{item.product.disc_price}
+                    </span>
+                    <span className="text-gray-400 line-through">
+                      ₹{item.product.price}
+                    </span>
                   </div>
+                </div>
+
+                {/* Quantity + Delete */}
+                <div className="flex sm:flex-col flex-row justify-between sm:justify-center items-center gap-4">
 
                   {/* Quantity */}
                   <div className="flex items-center gap-3 bg-white shadow px-3 py-2 rounded-xl">
@@ -210,76 +219,75 @@ const AddtoCart = () => {
                   {/* Delete */}
                   <FaTrash
                     onClick={() => removeCart(item.id)}
-                    className="text-red-500 cursor-pointer hover:scale-110"
+                    className="text-red-500 cursor-pointer text-xl hover:scale-110"
                   />
-                </div>
-              ))
-            )}
 
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* ================= RIGHT : SUMMARY ================= */}
+        <div className="w-full lg:w-[32%] bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] text-white rounded-3xl shadow-xl p-6 flex flex-col justify-between">
+
+          <div>
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold">Order Summary</h2>
+              <button
+                onClick={clearCart}
+                className="text-sm hover:text-red-300 transition">
+                Clear Cart
+              </button>
+            </div>
+
+            <div className="space-y-4 mt-8">
+              <div className="flex justify-between">
+                <span>Subtotal</span>
+                <span>₹ {sum}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>Shipping</span>
+                <span className="text-green-300">Free</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>Discount</span>
+                <span className="text-green-300">₹ 0</span>
+              </div>
+
+              <hr className="border-white/30" />
+
+              <div className="flex justify-between text-2xl font-bold">
+                <span>Total</span>
+                <span>₹ {sum}</span>
+              </div>
+
+              <p className="text-sm text-gray-300">
+                Taxes included • Delivery in 3–5 days
+              </p>
+            </div>
           </div>
 
-          {/* ================= RIGHT : SUMMARY ================= */}
-          <div className="w-full lg:w-[28%] h-[75vh] bg-linear-to-br from-[#1e3a8a] to-[#0f172a] text-white rounded-3xl shadow-xl p-6 flex flex-col justify-between">
+          {/* Buttons */}
+          <div className="mt-8">
+            <button
+              onClick={placeOrder}
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 rounded-xl transition">
+              Place Order
+            </button>
 
-            <div>
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold">Order Summary</h2>
-                <button
-                  onClick={clearCart}
-                  className="text-sm cursor-pointer hover:text-red-300 transition">
-                  Clear Cart
-                </button>
-              </div>
-
-              <div className="space-y-4 mt-8">
-                <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span>₹ {sum}</span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span>Shipping</span>
-                  <span className="text-green-300">Free</span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span>Discount</span>
-                  <span className="text-green-300">₹ 0</span>
-                </div>
-
-                <hr className="border-white/30" />
-
-                <div className="flex justify-between text-2xl font-bold">
-                  <span>Total</span>
-                  <span>₹ {sum}</span>
-                </div>
-
-                <p className="text-sm text-gray-300">
-                  Taxes included • Delivery in 3–5 days
-                </p>
-              </div>
-            </div>
-
-            {/* Buttons */}
-            <div>
-              <button
-                onClick={placeOrder}
-                className="w-full cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 rounded-xl transition">
-                Place Order
-              </button>
-
-              <button
-                onClick={() => navigate("/")}
-                className="w-full mt-3 cursor-pointer bg-white/20 hover:bg-white/30 py-3 rounded-xl transition">
-                Continue Shopping
-              </button>
-            </div>
-
+            <button
+              onClick={() => navigate("/")}
+              className="w-full mt-3 bg-white/20 hover:bg-white/30 py-3 rounded-xl transition">
+              Continue Shopping
+            </button>
           </div>
 
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

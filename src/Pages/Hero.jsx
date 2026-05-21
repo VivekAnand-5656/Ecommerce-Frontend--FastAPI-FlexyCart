@@ -25,7 +25,8 @@ import Profile from '../components/Profile'
 import { data, useNavigate } from 'react-router-dom'
 
 const Hero = () => {
-    const { token, cartlength, setCartlength, showProfileMenu, setShowProfileMenu, lengthwishlist, setLengthwishlist, iswishadd, setIswishadd } = useContext(AuthContext)
+    const { token, cartlength, setCartlength, showProfileMenu, setShowProfileMenu, lengthwishlist, setLengthwishlist, iswishadd, setIswishadd, purchaseProduct,setPurchaseProduct,purchasePop,
+        setPurchasePop, } = useContext(AuthContext)
     const [products, setProducts] = useState([])
     const [newArrivalProducts, setNewArrivalProducts] = useState([])
     const [loading, setLoading] = useState(true)
@@ -48,6 +49,36 @@ const Hero = () => {
 
     // ---- All Products Fetch ------
     const api_base = "https://e-commerce-project-3365.onrender.com"
+    // =========== But Product ========= 
+    const buyProduct = async(productid)=>{
+        try {
+            const response = await axios.post(`${api_base}/users/buyproduct/${productid}`,{},
+                {
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                }
+            )
+            const datas = response.data["Product"]
+            console.log("Purchase Product:- ",datas);
+            setPurchaseProduct(datas)
+            setPurchasePop(true)
+            toast.success("Buying Successfully 🎉", {
+                position: "top-center",
+                autoClose: 2000,
+                transition: Bounce
+            });
+            
+        } catch (error) {
+            console.log(`Error:- ${error}`);
+            toast.error(`Product Buying Error :- ${error}`, {
+                position: "top-center",
+                autoClose: 2000,
+                transition: Bounce
+            });
+            
+        }
+    }
     const fetchProducts = async () => {
         try {
             console.log("Started")
@@ -379,12 +410,24 @@ const Hero = () => {
                                 </div>
 
                                 {/* BUTTON */}
-                                <button
-                                    onClick={() => addCart(item.id)}
-                                    className="mt-4 bg-black hover:bg-gray-800 text-white py-2 rounded-xl font-semibold transition"
+                                <div
+                                    className="mt-4  text-white py-2 rounded-xl font-semibold transition flex justify-between "
+
                                 >
-                                    Add to Cart
-                                </button>
+                                    <button
+                                        onClick={() => addCart(item.id)}
+                                        className="bg-black p-1.5 cursor-pointer   text-white  rounded-xl font-semibold transition"
+                                    >
+                                        Add to Cart
+                                    </button>
+                                    <button
+                                    onClick={()=>buyProduct(item.id)}
+                                        className="bg-[#de9905] p-1.5 cursor-pointer  not-even: text-white rounded-xl font-semibold transition"
+                                    >
+                                        Buy Now
+                                    </button>
+
+                                </div>
 
                             </div>
                         ))}

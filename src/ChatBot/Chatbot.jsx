@@ -3,6 +3,8 @@ import { ImCross } from "react-icons/im";
 import { BsChatDots } from "react-icons/bs";
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
+import { FcUp } from "react-icons/fc";
+
 
 const Chatbot = () => {
 
@@ -64,12 +66,12 @@ const Chatbot = () => {
 
     return (
         <div className={chatShow
-            ? 'fixed z-10 p-2 right-0 bottom-0 w-[30%] h-[55%] border rounded-2xl bg-[#d1f0f4]'
+            ? 'fixed z-10 p-2 right-0 bottom-0 w-[50%] h-[50%] sm:w-[30%] sm:h-[55%]  rounded-2xl bg-[#d1f0f4]'
             : 'hidden'}>
 
             <ImCross
                 onClick={() => setChatShow(false)}
-                className='absolute right-3 top-3 text-red-500 cursor-pointer'
+                className='absolute right-3 sm:top-3 top-1  text-red-500 cursor-pointer'
             />
 
             {/* CHAT BOX */}
@@ -97,13 +99,19 @@ const Chatbot = () => {
             </div>
 
             {/* INPUT */}
-            <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={keyHandler}
-                placeholder='Ask with AI 🤖'
-                className='border p-2 w-full rounded mt-2'
-            />
+            <div className=' w-full flex justify-around items-center ' >
+                <input
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={keyHandler}
+                    placeholder='Ask with AI 🤖'
+                    className='border sm:p-2 p-1.5 w-[80%] rounded mt-2'
+                />
+                <FcUp
+                onClick={askChat} 
+                className='text-3xl sm:p-2 p-1.5 bg-[#908989] rounded ' />
+
+            </div>
         </div>
     )
 }

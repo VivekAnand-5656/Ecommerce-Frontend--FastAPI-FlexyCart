@@ -25,7 +25,7 @@ import Chatbot from '../ChatBot/Chatbot'
 import { FcAssistant } from "react-icons/fc";
 
 const Home = () => {
-    const { isLoggedIn, token, catagories, setAllProducts, chatShow,setChatShow } = useContext(AuthContext)
+    const { isLoggedIn, token, catagories, setAllProducts, chatShow, setChatShow } = useContext(AuthContext)
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -101,14 +101,14 @@ const Home = () => {
                     <>
                         <div className="min-w-screen flex flex-col  lg:gap-10 gap-3 p-2 bg-slate-100">
                             {/* ---- ChatBot ---- */}
-                            <FcAssistant 
-                            onClick={()=>setChatShow(true)}
-                            className={chatShow?' fixed hidden z-10 right-5 bottom-0':'text-5xl fixed z-10 right-5 bottom-5 cursor-pointer'} />
-                            <Chatbot/>
+                            <FcAssistant
+                                onClick={() => setChatShow(true)}
+                                className={chatShow ? ' fixed hidden z-10 right-5 bottom-0' : 'text-5xl fixed z-10 right-5 bottom-5 cursor-pointer'} />
+                            <Chatbot />
 
                             {/* HERO */}
-                            <section className=" w-full  lg:h-[75vh] h-screen bg-linear-to-br from-[#000000] relative to-[#010447]  text-white lg:rounded-3xl rounded-br-4xl shadow-xl lg:flex-row flex flex-col lg:justify-center justify-between items-center text-center p-2">
-                                <div className='lg:w-[40%] w-full h-[40%] lg:text-start text-justify flex flex-col  justify-center ' >
+                            <section className=" w-full  lg:h-[75vh] h-[80vh] bg-linear-to-br from-[#000000] relative to-[#010447]  text-white lg:rounded-3xl rounded-br-4xl shadow-xl lg:flex-row flex flex-col lg:justify-center justify-between items-center text-center p-2">
+                                <div className='lg:w-[40%] w-full  h-auto lg:text-start text-justify flex flex-col  ' >
                                     <h1 className="lg:text-5xl text-xl font-extrabold leading-tight lg:max-w-xl ">
                                         Shop Smarter. Live Better with <span className='text-[#FB7513]' >Flexycart</span>
                                     </h1>
@@ -116,15 +116,6 @@ const Home = () => {
                                     <p className="lg:mt-5 text-xl lg:text-lg  lg:max-w-2xl text-blue-100">
                                         Your one-stop eCommerce destination for electronics, fashion, gadgets and daily essentials.
                                     </p>
-
-                                    {/* <div className="flex gap-4 mt-8">
-                                        <button className="px-6 py-3 bg-white text-blue-700 rounded-xl font-semibold hover:scale-105 transition">
-                                            🛍️ Start Shopping
-                                        </button>
-                                        <button className="px-6 py-3 border border-white rounded-xl hover:bg-white hover:text-blue-700 transition">
-                                            🔍 Explore Products
-                                        </button>
-                                    </div> */}
 
                                     <p className="lg:mt-6 mt-0 text-sm text-blue-100">
                                         Fast delivery • Best prices • Trusted quality
@@ -198,12 +189,24 @@ const Home = () => {
                                                 </span>
                                             </div>
 
-                                            <button
-                                                onClick={() => addCart(item.id)}
-                                                className="mt-4 bg-black hover:bg-gray-800 text-white py-2 rounded-xl font-semibold transition"
+
+                                            <div
+                                                className="mt-4  text-white py-2 rounded-xl font-semibold transition flex justify-between "
+
                                             >
-                                                Add to Cart
-                                            </button>
+                                                <button
+                                                    onClick={() => addCart(item.id)}
+                                                    className="bg-black p-1.5 cursor-pointer   text-white  rounded-xl font-semibold transition"
+                                                >
+                                                    Add to Cart
+                                                </button>
+                                                <button
+                                                    className="bg-[#de9905] p-1.5 cursor-pointer  not-even: text-white rounded-xl font-semibold transition"
+                                                >
+                                                    Buy Now
+                                                </button>
+
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

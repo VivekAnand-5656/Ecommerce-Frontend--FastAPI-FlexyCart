@@ -12,6 +12,8 @@ const AuthProvider = ({children}) => {
     const [lengthwishlist,setLengthwishlist] = useState(0)
     const [iswishadd,setIswishadd] = useState(false)
     const [chatShow,setChatShow] = useState(false)
+    const [purchaseProduct,setPurchaseProduct] = useState([])
+    const [purchasePop,setPurchasePop] = useState(false)
     const login = (jwt)=>{
         setToken(jwt)
         localStorage.setItem("token", jwt)
@@ -26,7 +28,7 @@ const AuthProvider = ({children}) => {
   return ( 
     <AuthContext.Provider value={
         {
-            token,isLoggedIn,login,logout,cartlength,setCartlength,showProfileMenu,setShowProfileMenu,catagories,setCatagories,allProducts,setAllProducts,searchQuery,setSearchQuery,lengthwishlist,setLengthwishlist,iswishadd,setIswishadd, chatShow, setChatShow
+            token,isLoggedIn,login,logout,cartlength,setCartlength,showProfileMenu,setShowProfileMenu,catagories,setCatagories,allProducts,setAllProducts,searchQuery,setSearchQuery,lengthwishlist,setLengthwishlist,iswishadd,setIswishadd, chatShow, setChatShow,purchaseProduct,setPurchaseProduct,purchasePop,setPurchasePop
         }
     } >
         {children}
